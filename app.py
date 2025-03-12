@@ -5,10 +5,10 @@ st.set_page_config(page_title="Unit Converter", page_icon="🔄", layout="center
 
 # App Title
 st.title("🔄 Unit Converter")
-st.write("Easily convert between different units of Length, Weight, Temperature, and Area.")
+st.write("Easily convert between different units of Length, Weight, Temperature, Area, and Speed.")
 
 # Conversion Options
-conversion_type = st.selectbox("Select Conversion Type", ["Length", "Weight", "Temperature", "Area"])
+conversion_type = st.selectbox("Select Conversion Type", ["Length", "Weight", "Temperature", "Area", "Speed"])
 
 # Conversion Logic
 
@@ -54,12 +54,19 @@ def convert_area(value, from_unit, to_unit):
         "Square Kilometer": 0.000001,
         "Square Centimeter": 10000,
         "Square Millimeter": 1000000,
-        "Square Mile": 0.000000386102,
-        "Square Yard": 1.19599,
-        "Square Foot": 10.7639,
-        "Square Inch": 1550.0031,
-        "Acre": 0.000247105,
         "Hectare": 0.0001,
+        "Acre": 0.000247105,
+    }
+    return value * (conversion_factors[to_unit] / conversion_factors[from_unit])
+
+
+def convert_speed(value, from_unit, to_unit):
+    conversion_factors = {
+        "Meter per Second": 1,
+        "Kilometer per Hour": 3.6,
+        "Mile per Hour": 2.23694,
+        "Foot per Second": 3.28084,
+        "Knot": 1.94384,
     }
     return value * (conversion_factors[to_unit] / conversion_factors[from_unit])
 
@@ -85,12 +92,19 @@ elif conversion_type == "Temperature":
     to_unit = st.selectbox("To Unit", units)
     result = convert_temperature(value, from_unit, to_unit)
 
-else:
-    units = ["Square Meter", "Square Kilometer", "Square Centimeter", "Square Millimeter", "Square Mile", "Square Yard", "Square Foot", "Square Inch", "Acre", "Hectare"]
+elif conversion_type == "Area":
+    units = ["Square Meter", "Square Kilometer", "Square Centimeter", "Square Millimeter", "Hectare", "Acre"]
     value = st.number_input("Enter Area", min_value=0.0, format="%.2f")
     from_unit = st.selectbox("From Unit", units)
     to_unit = st.selectbox("To Unit", units)
     result = convert_area(value, from_unit, to_unit)
+
+else:
+    units = ["Meter per Second", "Kilometer per Hour", "Mile per Hour", "Foot per Second", "Knot"]
+    value = st.number_input("Enter Speed", min_value=0.0, format="%.2f")
+    from_unit = st.selectbox("From Unit", units)
+    to_unit = st.selectbox("To Unit", units)
+    result = convert_speed(value, from_unit, to_unit)
 
 # Display Result
 st.metric(label=f"Converted Value ({to_unit})", value=round(result, 2))
@@ -98,17 +112,18 @@ st.metric(label=f"Converted Value ({to_unit})", value=round(result, 2))
 # Developer Info
 st.sidebar.header("📌 Developer Info")
 st.sidebar.write("**Developer:** Fahad Khakwani")
-st.sidebar.write("**Version:** 1.1.0")
+st.sidebar.write("**Version:** 1.2.0")
 st.sidebar.write("**Tech Used:** Python, Streamlit")
-st.sidebar.write("🚀 Upgrade this app by adding more conversions like Speed and Time!")
+st.sidebar.write("🚀 Upgrade this app by adding more conversions like Volume, Pressure, and Time!")
 
 # Version History
-st.sidebar.subheader("📜 Version History")
-st.sidebar.write("- **v1.0.0 (2025-03-12):** Initial release with basic conversions (Length, Weight, and Temperature).")
-st.sidebar.write("- **v1.1.0 (2025-03-13):** Added Area conversions (Square Meter, Square Kilometer, Acre, Hectare, etc.)")
+st.sidebar.subheader("📌 Version History")
+st.sidebar.write("1.0.0 - Basic conversions: Length, Weight, Temperature")
+st.sidebar.write("1.1.0 - Added Area conversions")
+st.sidebar.write("1.2.0 - Added Speed conversions")
 
 # Upcoming Upgrades
 st.sidebar.subheader("🚀 Upcoming Upgrades")
-st.sidebar.write("- Add Speed conversion (m/s, km/h, mph, knots, etc.)")
-st.sidebar.write("- Add Time conversion (seconds, minutes, hours, days, weeks, etc.)")
-st.sidebar.write("- Improve UI with better color themes and input validations.")
+st.sidebar.write("✔️ Volume conversions")
+st.sidebar.write("✔️ Pressure conversions")
+st.sidebar.write("✔️ Time conversions")
