@@ -224,7 +224,7 @@ st.metric(label=f"Converted Value ({to_unit})", value=round(result(value, from_u
 # Sidebar Info
 st.sidebar.header("📌 Developer Info")
 st.sidebar.write("**Developer:** Fahad Khakwani")
-st.sidebar.write("**Version:** 1.8.1")
+st.sidebar.write("**Version:** 1.8.2")
 st.sidebar.write("**Tech Used:** Python, Streamlit")
 
 # Version History
@@ -240,7 +240,8 @@ st.sidebar.write("1.5.1 - ✅Updated Upcoming Upgrades List")
 st.sidebar.write("1.6.0 - ✅Added 'Energy' & 'Power' conversions")
 st.sidebar.write("1.7.0 - ✅Added Data Storage conversions")
 st.sidebar.write("1.8.0 - ✅Added Cooking Measurement conversions")
-st.sidebar.write("1.8.1 - ✅Added proper conversion values for data storage upto Zebibyte & reverse the calculation")
+st.sidebar.write("1.8.1 - ✅Added proper conversion values for data storage up to Zebibyte & reversed the calculation")
+st.sidebar.write("1.8.2 - ✅Created README.md & requirements.txt files")
 
 # Upcoming Upgrades
 st.sidebar.subheader("🚀 Upcoming Upgrades")
