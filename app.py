@@ -5,13 +5,12 @@ st.set_page_config(page_title="Advanced Unit Converter", page_icon="🔄", layou
 
 # App Title
 st.title("🔄 Advanced Unit Converter")
-st.write("Easily convert between different units of Length, Weight, Temperature, Area, Speed, Time, Volume, Pressure, and Currency.")
+st.write("Easily convert between different units of Length, Weight, Temperature, Area, Speed, Time, Volume, Pressure, Currency, Energy, Power, Data Storage, Cooking.")
 
 # Conversion Options
-conversion_type = st.selectbox("Select Conversion Type", ["Length", "Weight", "Temperature", "Area", "Speed", "Time", "Volume", "Pressure", "Currency"])
+conversion_type = st.selectbox("Select Conversion Type", ["Length", "Weight", "Temperature", "Area", "Speed", "Time", "Volume", "Pressure", "Currency", "Energy", "Power", "Data Storage", "Cooking"])
 
 # Conversion Logic
-
 def convert_length(value, from_unit, to_unit):
     conversion_factors = {
         "Meter": 1,
@@ -25,7 +24,6 @@ def convert_length(value, from_unit, to_unit):
     }
     return value * (conversion_factors[to_unit] / conversion_factors[from_unit])
 
-
 def convert_weight(value, from_unit, to_unit):
     conversion_factors = {
         "Kilogram": 1,
@@ -36,7 +34,6 @@ def convert_weight(value, from_unit, to_unit):
     }
     return value * (conversion_factors[to_unit] / conversion_factors[from_unit])
 
-
 def convert_temperature(value, from_unit, to_unit):
     if from_unit == to_unit:
         return value
@@ -46,7 +43,6 @@ def convert_temperature(value, from_unit, to_unit):
         return (value - 32) * 5/9 if to_unit == "Celsius" else ((value - 32) * 5/9) + 273.15
     if from_unit == "Kelvin":
         return value - 273.15 if to_unit == "Celsius" else (value - 273.15) * 9/5 + 32
-
 
 def convert_area(value, from_unit, to_unit):
     conversion_factors = {
@@ -59,7 +55,6 @@ def convert_area(value, from_unit, to_unit):
     }
     return value * (conversion_factors[to_unit] / conversion_factors[from_unit])
 
-
 def convert_speed(value, from_unit, to_unit):
     conversion_factors = {
         "Meter per Second": 1,
@@ -70,7 +65,6 @@ def convert_speed(value, from_unit, to_unit):
     }
     return value * (conversion_factors[to_unit] / conversion_factors[from_unit])
 
-
 def convert_time(value, from_unit, to_unit):
     conversion_factors = {
         "Second": 1,
@@ -79,7 +73,6 @@ def convert_time(value, from_unit, to_unit):
         "Day": 1/86400,
     }
     return value * (conversion_factors[to_unit] / conversion_factors[from_unit])
-
 
 def convert_volume(value, from_unit, to_unit):
     conversion_factors = {
@@ -93,7 +86,6 @@ def convert_volume(value, from_unit, to_unit):
         "Fluid Ounce": 33.814,
     }
     return value * (conversion_factors[to_unit] / conversion_factors[from_unit])
-
 
 def convert_pressure(value, from_unit, to_unit):
     conversion_factors = {
@@ -156,6 +148,20 @@ def convert_data_storage(value, from_unit, to_unit):
     }
     return value * (conversion_factors[to_unit] / conversion_factors[from_unit])
 
+def convert_cooking(value, from_unit, to_unit):
+    conversion_factors = {
+        "Teaspoon": 1,
+        "Tablespoon": 0.3333,
+        "Cup": 0.0208,
+        "Fluid Ounce": 0.1667,
+        "Pint": 0.0104,
+        "Quart": 0.0052,
+        "Gallon": 0.0013,
+        "Milliliter": 4.9289,
+        "Liter": 0.0049289,
+    }
+    return value * (conversion_factors[to_unit] / conversion_factors[from_unit])
+
 
 # User Input
 if conversion_type == "Length":
@@ -194,9 +200,13 @@ elif conversion_type == "Power":
 elif conversion_type == "Data Storage":
     units = ["Bit", "Byte", "Kilobyte", "Megabyte", "Gigabyte", "Terabyte", "Petabyte"]
     result = convert_data_storag
+elif conversion_type == "Cooking":
+    units = ["Teaspoon", "Tablespoon", "Cup", "Fluid Ounce", "Pint", "Quart", "Gallon", "Milliliter", "Liter"]
+    result = convert_cooking
 else:
     result = None
 
+# Main Conversion Interface
 value = st.number_input("Enter Value", min_value=0.0, format="%.2f")
 from_unit = st.selectbox("From Unit", units)
 to_unit = st.selectbox("To Unit", units)
@@ -205,7 +215,7 @@ st.metric(label=f"Converted Value ({to_unit})", value=round(result(value, from_u
 # Sidebar Info
 st.sidebar.header("📌 Developer Info")
 st.sidebar.write("**Developer:** Fahad Khakwani")
-st.sidebar.write("**Version:** 1.7.0")
+st.sidebar.write("**Version:** 1.8.0")
 st.sidebar.write("**Tech Used:** Python, Streamlit")
 
 # Version History
@@ -214,20 +224,21 @@ st.sidebar.write("1.0.0 - ✅Basic conversions: Length, Weight, Temperature")
 st.sidebar.write("1.1.0 - ✅Added Area conversions")
 st.sidebar.write("1.2.0 - ✅Added Speed conversions")
 st.sidebar.write("1.3.0 - ✅Added Time conversions")
-st.sidebar.write("1.4.0 - ✅Added Volume & Pressure conversions")
+st.sidebar.write("1.4.0 - ✅Added 'Volume' & 'Pressure' conversions")
 st.sidebar.write("1.4.1 - ✅Name changed to **Advanced Unit Converter**")
 st.sidebar.write("1.5.0 - ✅Added Currency conversions (12 Currencies)")
-st.sidebar.write("1.5.1 - ✅Upcoming Upgrades")
-st.sidebar.write("1.6.0 - ✅Added Energy & Power conversions")
+st.sidebar.write("1.5.1 - ✅Upcoming Upgrades List")
+st.sidebar.write("1.6.0 - ✅Added 'Energy' & 'Power' conversions")
 st.sidebar.write("1.7.0 - ✅Added Data Storage conversions")
+st.sidebar.write("1.8.0 - ✅Added Cooking Measurement conversions")
 
 # Upcoming Upgrades
 st.sidebar.subheader("🚀 Upcoming Upgrades")
+st.sidebar.write("✔️ 'Scientific' & 'Engineering' conversions")
 st.sidebar.write("✔️ Fuel Efficiency conversions")
 st.sidebar.write("✔️ Watt Conversion (Power, Voltage, Current, Resistance)")
 st.sidebar.write("✔️ Force conversions")
 st.sidebar.write("✔️ Torque conversions")
-st.sidebar.write("✔️ Cooking Measurement conversions")
 st.sidebar.write("✔️ Electric Charge conversions")
 st.sidebar.write("✔️ Electric Current conversions")
 st.sidebar.write("✔️ Voltage conversions")
