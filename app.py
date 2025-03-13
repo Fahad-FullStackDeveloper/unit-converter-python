@@ -161,7 +161,7 @@ st.metric(label=f"Converted Value ({to_unit})", value=round(result(value, from_u
 # Sidebar Info
 st.sidebar.header("📌 Developer Info")
 st.sidebar.write("**Developer:** Fahad Khakwani")
-st.sidebar.write("**Version:** 1.5.0")
+st.sidebar.write("**Version:** 1.5.1")
 st.sidebar.write("**Tech Used:** Python, Streamlit")
 
 # Version History
@@ -173,9 +173,22 @@ st.sidebar.write("1.3.0 - Added Time conversions")
 st.sidebar.write("1.4.0 - Added Volume & Pressure conversions")
 st.sidebar.write("1.4.1 - Name changed to **Advanced Unit Converter**")
 st.sidebar.write("1.5.0 - Added Currency conversions (12 Currencies)")
-
+st.sidebar.write("1.5.1 - Upcoming Upgrades")
 
 # Upcoming Upgrades
 st.sidebar.subheader("🚀 Upcoming Upgrades")
+st.sidebar.write("✔️ Power conversions")
+st.sidebar.write("✔️ Data Storage conversions")
+st.sidebar.write("✔️ Fuel Efficiency conversions")
+st.sidebar.write("✔️ Watt Conversion (Power, Voltage, Current, Resistance)")
 st.sidebar.write("✔️ Energy conversions")
-st.sidebar.write("✔️ Scientific & Engineering unit conversions")
+st.sidebar.write("✔️ Force conversions")
+st.sidebar.write("✔️ Torque conversions")
+st.sidebar.write("✔️ Cooking Measurement conversions")
+st.sidebar.write("✔️ Electric Charge conversions")
+st.sidebar.write("✔️ Electric Current conversions")
+st.sidebar.write("✔️ Voltage conversions")
+st.sidebar.write("✔️ Acceleration conversions")
+st.sidebar.write("✔️ Density / Mass per Volume conversions")
+st.sidebar.write("✔️ Charge Capacity conversions")
+st.sidebar.write("✔️ Common Conversion Units for Power Watt (W), Kilowatt (kW), Megawatt (MW), Horsepower (HP), Joule per second (J/s), BTU per hour (BTU/h), Calorie per second (cal/s) conversions")
