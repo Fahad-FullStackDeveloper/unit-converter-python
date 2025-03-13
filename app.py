@@ -48,22 +48,82 @@ def convert_temperature(value, from_unit, to_unit):
         return value - 273.15 if to_unit == "Celsius" else (value - 273.15) * 9/5 + 32
 
 
+def convert_area(value, from_unit, to_unit):
+    conversion_factors = {
+        "Square Meter": 1,
+        "Square Kilometer": 0.000001,
+        "Square Centimeter": 10000,
+        "Square Millimeter": 1000000,
+        "Hectare": 0.0001,
+        "Acre": 0.000247105,
+    }
+    return value * (conversion_factors[to_unit] / conversion_factors[from_unit])
+
+
+def convert_speed(value, from_unit, to_unit):
+    conversion_factors = {
+        "Meter per Second": 1,
+        "Kilometer per Hour": 3.6,
+        "Mile per Hour": 2.23694,
+        "Foot per Second": 3.28084,
+        "Knot": 1.94384,
+    }
+    return value * (conversion_factors[to_unit] / conversion_factors[from_unit])
+
+
+def convert_time(value, from_unit, to_unit):
+    conversion_factors = {
+        "Second": 1,
+        "Minute": 1/60,
+        "Hour": 1/3600,
+        "Day": 1/86400,
+    }
+    return value * (conversion_factors[to_unit] / conversion_factors[from_unit])
+
+
+def convert_volume(value, from_unit, to_unit):
+    conversion_factors = {
+        "Liter": 1,
+        "Milliliter": 1000,
+        "Cubic Meter": 0.001,
+        "Gallon": 0.264172,
+        "Quart": 1.05669,
+        "Pint": 2.11338,
+        "Cup": 4.16667,
+        "Fluid Ounce": 33.814,
+    }
+    return value * (conversion_factors[to_unit] / conversion_factors[from_unit])
+
+
+def convert_pressure(value, from_unit, to_unit):
+    conversion_factors = {
+        "Pascal": 1,
+        "Kilopascal": 0.001,
+        "Bar": 0.00001,
+        "PSI": 0.000145038,
+        "Atmosphere": 0.00000986923,
+    }
+    return value * (conversion_factors[to_unit] / conversion_factors[from_unit])
+
 def convert_currency(value, from_unit, to_unit):
     conversion_rates = {
         "USD": 1,
-        "EUR": 0.85,
-        "GBP": 0.75,
-        "INR": 74.5,
-        "JPY": 110,
-        "CNY": 6.45,
+        "EUR": 0.91,
+        "GBP": 0.78,
+        "INR": 82.75,
+        "PKR": 277.5,
+        "AUD": 1.53,
+        "CAD": 1.35,
+        "JPY": 149.1,
+        "CNY": 7.12,
+        "SAR": 3.75,
+        "AED": 3.67,
+        "CHF": 0.88,
     }
     return value * (conversion_rates[to_unit] / conversion_rates[from_unit])
 
 # User Input
-if conversion_type == "Currency":
-    units = ["USD", "EUR", "GBP", "INR", "JPY", "CNY"]
-    result = convert_currency
-elif conversion_type == "Length":
+if conversion_type == "Length":
     units = ["Meter", "Kilometer", "Centimeter", "Millimeter", "Mile", "Yard", "Foot", "Inch"]
     result = convert_length
 elif conversion_type == "Weight":
@@ -72,6 +132,26 @@ elif conversion_type == "Weight":
 elif conversion_type == "Temperature":
     units = ["Celsius", "Fahrenheit", "Kelvin"]
     result = convert_temperature
+elif conversion_type == "Area":
+    units = ["Square Meter", "Square Kilometer", "Square Centimeter", "Square Millimeter", "Hectare", "Acre"]
+    result = convert_area
+elif conversion_type == "Speed":
+    units = ["Meter per Second", "Kilometer per Hour", "Mile per Hour", "Foot per Second", "Knot"]
+    result = convert_speed
+elif conversion_type == "Time":
+    units = ["Second", "Minute", "Hour", "Day"]
+    result = convert_time
+elif conversion_type == "Volume":
+    units = ["Liter", "Milliliter", "Cubic Meter", "Gallon", "Quart", "Pint", "Cup", "Fluid Ounce"]
+    result = convert_volume
+elif conversion_type == "Pressure":
+    units = ["Pascal", "Kilopascal", "Bar", "PSI", "Atmosphere"]
+    result = convert_pressure
+elif conversion_type == "Currency":
+    units = ["USD", "EUR", "GBP", "INR", "PKR", "AUD", "CAD", "JPY", "CNY", "SAR", "AED", "CHF"]
+    result = convert_currency
+else:
+    result = None
 
 value = st.number_input("Enter Value", min_value=0.0, format="%.2f")
 from_unit = st.selectbox("From Unit", units)
@@ -92,9 +172,10 @@ st.sidebar.write("1.2.0 - Added Speed conversions")
 st.sidebar.write("1.3.0 - Added Time conversions")
 st.sidebar.write("1.4.0 - Added Volume & Pressure conversions")
 st.sidebar.write("1.4.1 - Name changed to **Advanced Unit Converter**")
-st.sidebar.write("1.5.0 - Added Currency conversions")
+st.sidebar.write("1.5.0 - Added Currency conversions (12 Currencies)")
+
 
 # Upcoming Upgrades
 st.sidebar.subheader("🚀 Upcoming Upgrades")
 st.sidebar.write("✔️ Energy conversions")
-st.sidebar.write("✔️ Power conversions")
+st.sidebar.write("✔️ Scientific & Engineering unit conversions")
