@@ -144,6 +144,18 @@ def convert_power(value, from_unit, to_unit):
     }
     return value * (conversion_factors[to_unit] / conversion_factors[from_unit])
 
+def convert_data_storage(value, from_unit, to_unit):
+    conversion_factors = {
+        "Bit": 1,
+        "Byte": 8,
+        "Kilobyte": 8e3,
+        "Megabyte": 8e6,
+        "Gigabyte": 8e9,
+        "Terabyte": 8e12,
+        "Petabyte": 8e15,
+    }
+    return value * (conversion_factors[to_unit] / conversion_factors[from_unit])
+
 
 # User Input
 if conversion_type == "Length":
@@ -179,6 +191,9 @@ elif conversion_type == "Energy":
 elif conversion_type == "Power":
     units = ["Watt", "Kilowatt", "Megawatt", "Horsepower", "BTU per hour", "Calorie per second"]
     result = convert_power
+elif conversion_type == "Data Storage":
+    units = ["Bit", "Byte", "Kilobyte", "Megabyte", "Gigabyte", "Terabyte", "Petabyte"]
+    result = convert_data_storag
 else:
     result = None
 
@@ -190,7 +205,7 @@ st.metric(label=f"Converted Value ({to_unit})", value=round(result(value, from_u
 # Sidebar Info
 st.sidebar.header("📌 Developer Info")
 st.sidebar.write("**Developer:** Fahad Khakwani")
-st.sidebar.write("**Version:** 1.6.0")
+st.sidebar.write("**Version:** 1.7.0")
 st.sidebar.write("**Tech Used:** Python, Streamlit")
 
 # Version History
@@ -204,10 +219,10 @@ st.sidebar.write("1.4.1 - ✅Name changed to **Advanced Unit Converter**")
 st.sidebar.write("1.5.0 - ✅Added Currency conversions (12 Currencies)")
 st.sidebar.write("1.5.1 - ✅Upcoming Upgrades")
 st.sidebar.write("1.6.0 - ✅Added Energy & Power conversions")
+st.sidebar.write("1.7.0 - ✅Added Data Storage conversions")
 
 # Upcoming Upgrades
 st.sidebar.subheader("🚀 Upcoming Upgrades")
-st.sidebar.write("✔️ Data Storage conversions")
 st.sidebar.write("✔️ Fuel Efficiency conversions")
 st.sidebar.write("✔️ Watt Conversion (Power, Voltage, Current, Resistance)")
 st.sidebar.write("✔️ Force conversions")
@@ -219,4 +234,3 @@ st.sidebar.write("✔️ Voltage conversions")
 st.sidebar.write("✔️ Acceleration conversions")
 st.sidebar.write("✔️ Density / Mass per Volume conversions")
 st.sidebar.write("✔️ Charge Capacity conversions")
-st.sidebar.write("✔️ Common Conversion Units for Power Watt (W), Kilowatt (kW), Megawatt (MW), Horsepower (HP), Joule per second (J/s), BTU per hour (BTU/h), Calorie per second (cal/s) conversions")
