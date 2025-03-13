@@ -5,10 +5,10 @@ st.set_page_config(page_title="Unit Converter", page_icon="🔄", layout="center
 
 # App Title
 st.title("🔄 Unit Converter")
-st.write("Easily convert between different units of Length, Weight, Temperature, Area, and Speed.")
+st.write("Easily convert between different units of Length, Weight, Temperature, Area, Speed, and Time.")
 
 # Conversion Options
-conversion_type = st.selectbox("Select Conversion Type", ["Length", "Weight", "Temperature", "Area", "Speed"])
+conversion_type = st.selectbox("Select Conversion Type", ["Length", "Weight", "Temperature", "Area", "Speed", "Time"])
 
 # Conversion Logic
 
@@ -70,6 +70,16 @@ def convert_speed(value, from_unit, to_unit):
     }
     return value * (conversion_factors[to_unit] / conversion_factors[from_unit])
 
+
+def convert_time(value, from_unit, to_unit):
+    conversion_factors = {
+        "Second": 1,
+        "Minute": 1/60,
+        "Hour": 1/3600,
+        "Day": 1/86400,
+    }
+    return value * (conversion_factors[to_unit] / conversion_factors[from_unit])
+
 # User Input
 if conversion_type == "Length":
     units = ["Meter", "Kilometer", "Centimeter", "Millimeter", "Mile", "Yard", "Foot", "Inch"]
@@ -99,12 +109,19 @@ elif conversion_type == "Area":
     to_unit = st.selectbox("To Unit", units)
     result = convert_area(value, from_unit, to_unit)
 
-else:
+elif conversion_type == "Speed":
     units = ["Meter per Second", "Kilometer per Hour", "Mile per Hour", "Foot per Second", "Knot"]
     value = st.number_input("Enter Speed", min_value=0.0, format="%.2f")
     from_unit = st.selectbox("From Unit", units)
     to_unit = st.selectbox("To Unit", units)
     result = convert_speed(value, from_unit, to_unit)
+
+else:
+    units = ["Second", "Minute", "Hour", "Day"]
+    value = st.number_input("Enter Time", min_value=0.0, format="%.2f")
+    from_unit = st.selectbox("From Unit", units)
+    to_unit = st.selectbox("To Unit", units)
+    result = convert_time(value, from_unit, to_unit)
 
 # Display Result
 st.metric(label=f"Converted Value ({to_unit})", value=round(result, 2))
@@ -112,18 +129,17 @@ st.metric(label=f"Converted Value ({to_unit})", value=round(result, 2))
 # Developer Info
 st.sidebar.header("📌 Developer Info")
 st.sidebar.write("**Developer:** Fahad Khakwani")
-st.sidebar.write("**Version:** 1.2.0")
+st.sidebar.write("**Version:** 1.3.0")
 st.sidebar.write("**Tech Used:** Python, Streamlit")
-st.sidebar.write("🚀 Upgrade this app by adding more conversions like Volume, Pressure, and Time!")
 
 # Version History
 st.sidebar.subheader("📌 Version History")
 st.sidebar.write("1.0.0 - Basic conversions: Length, Weight, Temperature")
 st.sidebar.write("1.1.0 - Added Area conversions")
 st.sidebar.write("1.2.0 - Added Speed conversions")
+st.sidebar.write("1.3.0 - Added Time conversions")
 
 # Upcoming Upgrades
 st.sidebar.subheader("🚀 Upcoming Upgrades")
 st.sidebar.write("✔️ Volume conversions")
 st.sidebar.write("✔️ Pressure conversions")
-st.sidebar.write("✔️ Time conversions")
