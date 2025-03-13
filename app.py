@@ -5,7 +5,7 @@ st.set_page_config(page_title="Advanced Unit Converter", page_icon="🔄", layou
 
 # App Title
 st.title("🔄 Advanced Unit Converter")
-st.write("Easily convert between different units of Length, Weight, Temperature, Area, Speed, Time, Volume, Pressure, Currency, Energy, Power, Data Storage, Cooking.")
+st.write("Easily convert between different units of **Length, Weight, Temperature, Area, Speed, Time, Volume, Pressure, Currency, Energy, Power, Data Storage, Cooking**.")
 
 # Conversion Options
 conversion_type = st.selectbox("Select Conversion Type", ["Length", "Weight", "Temperature", "Area", "Speed", "Time", "Volume", "Pressure", "Currency", "Energy", "Power", "Data Storage", "Cooking"])
@@ -136,17 +136,26 @@ def convert_power(value, from_unit, to_unit):
     }
     return value * (conversion_factors[to_unit] / conversion_factors[from_unit])
 
-def convert_data_storage(value, from_unit, to_unit):
+def convert_data_storage(value, to_unit, from_unit):
     conversion_factors = {
         "Bit": 1,
         "Byte": 8,
-        "Kilobyte": 8e3,
-        "Megabyte": 8e6,
-        "Gigabyte": 8e9,
-        "Terabyte": 8e12,
-        "Petabyte": 8e15,
+        "Kilobyte": 8192,           # 1024 * 8
+        "Megabyte": 8388608,        # 1024 * 8192
+        "Gigabyte": 8589934592,     # 1024 * 8388608
+        "Terabyte": 8796093022208,  # 1024 * 8589934592
+        "Petabyte": 9007199254740992,  # 1024 * 8796093022208
+        "Exabyte": 9223372036854775808,  # 1024 * 9007199254740992
+        "Zettabyte": 92233720368547758080,  # 1024 * 9223372036854775808
+        "Yottabyte": 922337203685477580800,  # 1024 * 92233720368547758080
+        "Yobibyte": 9223372036854775808000,  # 1024 * 922337203685477580800
+        "Zebibyte": 92233720368547758080000,  # 1024 * 9223372036854775808000
     }
     return value * (conversion_factors[to_unit] / conversion_factors[from_unit])
+    # Example Usage
+    # print(convert_data_storage(1, "Megabyte", "Kilobyte"))  # Output: 1024KB
+    # print(convert_data_storage(1, "Gigabyte", "Megabyte"))  # Output: 1024MB
+    # print(convert_data_storage(5, "Terabyte", "Gigabyte"))  # Output: 5120GB
 
 def convert_cooking(value, from_unit, to_unit):
     conversion_factors = {
@@ -198,8 +207,8 @@ elif conversion_type == "Power":
     units = ["Watt", "Kilowatt", "Megawatt", "Horsepower", "BTU per hour", "Calorie per second"]
     result = convert_power
 elif conversion_type == "Data Storage":
-    units = ["Bit", "Byte", "Kilobyte", "Megabyte", "Gigabyte", "Terabyte", "Petabyte"]
-    result = convert_data_storag
+    units = ["Bit", "Byte", "Kilobyte", "Megabyte", "Gigabyte", "Terabyte", "Petabyte", "Exabyte", "Zettabyte", "Yottabyte", "Yobibyte", "Zebibyte"]
+    result = convert_data_storage
 elif conversion_type == "Cooking":
     units = ["Teaspoon", "Tablespoon", "Cup", "Fluid Ounce", "Pint", "Quart", "Gallon", "Milliliter", "Liter"]
     result = convert_cooking
@@ -215,7 +224,7 @@ st.metric(label=f"Converted Value ({to_unit})", value=round(result(value, from_u
 # Sidebar Info
 st.sidebar.header("📌 Developer Info")
 st.sidebar.write("**Developer:** Fahad Khakwani")
-st.sidebar.write("**Version:** 1.8.0")
+st.sidebar.write("**Version:** 1.8.1")
 st.sidebar.write("**Tech Used:** Python, Streamlit")
 
 # Version History
@@ -227,10 +236,11 @@ st.sidebar.write("1.3.0 - ✅Added Time conversions")
 st.sidebar.write("1.4.0 - ✅Added 'Volume' & 'Pressure' conversions")
 st.sidebar.write("1.4.1 - ✅Name changed to **Advanced Unit Converter**")
 st.sidebar.write("1.5.0 - ✅Added Currency conversions (12 Currencies)")
-st.sidebar.write("1.5.1 - ✅Upcoming Upgrades List")
+st.sidebar.write("1.5.1 - ✅Updated Upcoming Upgrades List")
 st.sidebar.write("1.6.0 - ✅Added 'Energy' & 'Power' conversions")
 st.sidebar.write("1.7.0 - ✅Added Data Storage conversions")
 st.sidebar.write("1.8.0 - ✅Added Cooking Measurement conversions")
+st.sidebar.write("1.8.1 - ✅Added proper conversion values for data storage upto Zebibyte & reverse the calculation")
 
 # Upcoming Upgrades
 st.sidebar.subheader("🚀 Upcoming Upgrades")
