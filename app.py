@@ -122,6 +122,29 @@ def convert_currency(value, from_unit, to_unit):
     }
     return value * (conversion_rates[to_unit] / conversion_rates[from_unit])
 
+def convert_energy(value, from_unit, to_unit):
+    conversion_factors = {
+        "Joule": 1,
+        "Kilojoule": 0.001,
+        "Calorie": 0.239006,
+        "Kilocalorie": 0.000239006,
+        "Watt-hour": 0.000277778,
+        "Kilowatt-hour": 2.7778e-7,
+    }
+    return value * (conversion_factors[to_unit] / conversion_factors[from_unit])
+
+def convert_power(value, from_unit, to_unit):
+    conversion_factors = {
+        "Watt": 1,
+        "Kilowatt": 0.001,
+        "Megawatt": 1e-6,
+        "Horsepower": 0.00134102,
+        "BTU per hour": 3.41214,
+        "Calorie per second": 0.238845,
+    }
+    return value * (conversion_factors[to_unit] / conversion_factors[from_unit])
+
+
 # User Input
 if conversion_type == "Length":
     units = ["Meter", "Kilometer", "Centimeter", "Millimeter", "Mile", "Yard", "Foot", "Inch"]
@@ -150,6 +173,12 @@ elif conversion_type == "Pressure":
 elif conversion_type == "Currency":
     units = ["USD", "EUR", "GBP", "INR", "PKR", "AUD", "CAD", "JPY", "CNY", "SAR", "AED", "CHF"]
     result = convert_currency
+elif conversion_type == "Energy":
+    units = ["Joule", "Kilojoule", "Calorie", "Kilocalorie", "Watt-hour", "Kilowatt-hour"]
+    result = convert_energy
+elif conversion_type == "Power":
+    units = ["Watt", "Kilowatt", "Megawatt", "Horsepower", "BTU per hour", "Calorie per second"]
+    result = convert_power
 else:
     result = None
 
@@ -161,27 +190,26 @@ st.metric(label=f"Converted Value ({to_unit})", value=round(result(value, from_u
 # Sidebar Info
 st.sidebar.header("📌 Developer Info")
 st.sidebar.write("**Developer:** Fahad Khakwani")
-st.sidebar.write("**Version:** 1.5.1")
+st.sidebar.write("**Version:** 1.6.0")
 st.sidebar.write("**Tech Used:** Python, Streamlit")
 
 # Version History
 st.sidebar.subheader("📌 Version History")
-st.sidebar.write("1.0.0 - Basic conversions: Length, Weight, Temperature")
-st.sidebar.write("1.1.0 - Added Area conversions")
-st.sidebar.write("1.2.0 - Added Speed conversions")
-st.sidebar.write("1.3.0 - Added Time conversions")
-st.sidebar.write("1.4.0 - Added Volume & Pressure conversions")
-st.sidebar.write("1.4.1 - Name changed to **Advanced Unit Converter**")
-st.sidebar.write("1.5.0 - Added Currency conversions (12 Currencies)")
-st.sidebar.write("1.5.1 - Upcoming Upgrades")
+st.sidebar.write("1.0.0 - ✅Basic conversions: Length, Weight, Temperature")
+st.sidebar.write("1.1.0 - ✅Added Area conversions")
+st.sidebar.write("1.2.0 - ✅Added Speed conversions")
+st.sidebar.write("1.3.0 - ✅Added Time conversions")
+st.sidebar.write("1.4.0 - ✅Added Volume & Pressure conversions")
+st.sidebar.write("1.4.1 - ✅Name changed to **Advanced Unit Converter**")
+st.sidebar.write("1.5.0 - ✅Added Currency conversions (12 Currencies)")
+st.sidebar.write("1.5.1 - ✅Upcoming Upgrades")
+st.sidebar.write("1.6.0 - ✅Added Energy & Power conversions")
 
 # Upcoming Upgrades
 st.sidebar.subheader("🚀 Upcoming Upgrades")
-st.sidebar.write("✔️ Power conversions")
 st.sidebar.write("✔️ Data Storage conversions")
 st.sidebar.write("✔️ Fuel Efficiency conversions")
 st.sidebar.write("✔️ Watt Conversion (Power, Voltage, Current, Resistance)")
-st.sidebar.write("✔️ Energy conversions")
 st.sidebar.write("✔️ Force conversions")
 st.sidebar.write("✔️ Torque conversions")
 st.sidebar.write("✔️ Cooking Measurement conversions")
