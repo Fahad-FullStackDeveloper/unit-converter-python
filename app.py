@@ -1,10 +1,10 @@
 import streamlit as st
 
 # App Metadata
-st.set_page_config(page_title="Unit Converter", page_icon="🔄", layout="centered")
+st.set_page_config(page_title="Advanced Unit Converter", page_icon="🔄", layout="centered")
 
 # App Title
-st.title("🔄 Unit Converter")
+st.title("🔄 Advanced Unit Converter")
 st.write("Easily convert between different units of Length, Weight, Temperature, Area, Speed, Time, Volume, and Pressure.")
 
 # Conversion Options
@@ -139,7 +139,7 @@ st.metric(label=f"Converted Value ({to_unit})", value=round(result(value, from_u
 # Sidebar Info
 st.sidebar.header("📌 Developer Info")
 st.sidebar.write("**Developer:** Fahad Khakwani")
-st.sidebar.write("**Version:** 1.4.0")
+st.sidebar.write("**Version:** 1.4.1")
 st.sidebar.write("**Tech Used:** Python, Streamlit")
 
 # Version History
@@ -149,6 +149,7 @@ st.sidebar.write("1.1.0 - Added Area conversions")
 st.sidebar.write("1.2.0 - Added Speed conversions")
 st.sidebar.write("1.3.0 - Added Time conversions")
 st.sidebar.write("1.4.0 - Added Volume & Pressure conversions")
+st.sidebar.write("1.4.1 - Name changed to **Advanced Unit Converter**")
 
 # Upcoming Upgrades
 st.sidebar.subheader("🚀 Upcoming Upgrades")
